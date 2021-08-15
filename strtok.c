@@ -43,7 +43,7 @@ char **splits(char **av)
 		_strcat(buffer, av[i]);
 		_strcat(buffer, delim);
 	}
-	tokens = malloc(sizeof(char **) * i);
+	tokens = malloc(sizeof(char *) * i);
 	if (tokens == NULL)
 	{
 		free(tokens);
@@ -53,11 +53,12 @@ char **splits(char **av)
 
 	for (i = 0; av[i]; i++)
 	{
-		tokens[i] = malloc(sizeof(char) * (strlen(word) + 1));
+		tokens[i] = malloc(sizeof(char *));
 		if (tokens[i] == NULL)
 			return (0);
 		tokens[i] = strtok(NULL, delim);
 	}
+	printf("");
 	return (tokens);
 }
 
@@ -69,7 +70,9 @@ int main(int ac, char **av)
 	loquesea = splits(av);
 
 	for (i = 0; loquesea[i]; i++)
+	{
 		printf("arrays -> %s\n", loquesea[i]);
+	}
 
 	free(loquesea);
 	return (0);
