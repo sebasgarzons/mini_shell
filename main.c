@@ -17,10 +17,12 @@ int main()
 {
 	char *prompt = "cuchufli% ";
 	char *line;
-	int input = 0;
+	int input = 0, status = 0;
 	size_t lineSize = 0;
+	pid_t child_pid;
 	char *program = "ls";
 	char *parameters = NULL;
+	char buffer[2] = "He";
 
 	while (1)
 	{
@@ -33,12 +35,15 @@ int main()
 			free(line);
 			return (0);
 		}
+		child_pid = fork();
 
 		if (strcmp(program, line) == 0)
-		{
-			if (fork() == 0)
-				execve("/bin/ls", &program, environ);
-		}
+
+			if (child_pid == 0)
+				printf("%s", buffer);
+			else
+				wait();
+		// execve("/bin/ls", &program, environ);
 
 		// write(STDOUT_FILENO, line, input);
 	}
