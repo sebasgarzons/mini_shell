@@ -43,19 +43,20 @@ char **splits(char **av)
 		_strcat(buffer, av[i]);
 		_strcat(buffer, delim);
 	}
-	tokens = malloc(sizeof(char *) * i);
+	tokens = malloc(sizeof(char **) * i);
 	if (tokens == NULL)
 	{
 		free(tokens);
 		return (0);
 	}
-
 	word = strtok(buffer, delim);
 
-	for (i = 0; word != NULL; i++)
+	for (i = 0; av[i]; i++)
 	{
-		tokens[i] = word;
-		word = strtok(NULL, delim);
+		tokens[i] = malloc(sizeof(char) * (strlen(word) + 1));
+		if (tokens[i] == NULL)
+			return (0);
+		tokens[i] = strtok(NULL, delim);
 	}
 	return (tokens);
 }
