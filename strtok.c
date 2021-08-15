@@ -43,7 +43,6 @@ char **splits(char **av)
 		_strcat(buffer, av[i]);
 		_strcat(buffer, delim);
 	}
-
 	tokens = malloc(sizeof(char *) * i);
 	if (tokens == NULL)
 	{
@@ -56,7 +55,6 @@ char **splits(char **av)
 	for (i = 0; word != NULL; i++)
 	{
 		tokens[i] = word;
-		printf("word -> %s\n", word);
 		word = strtok(NULL, delim);
 	}
 	return (tokens);
